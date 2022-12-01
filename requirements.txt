@@ -2,4 +2,5 @@ Django==4.0
 psycopg2-binary==2.8.5
 django-mptt==0.14.0
 django-bootstrap4==22.3
+Faker==15.3.4
 

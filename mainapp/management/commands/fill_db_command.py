@@ -3,6 +3,9 @@ import random
 
 from django.core.management.base import BaseCommand
 from mainapp.models import Employee, Unit
+from faker import Faker
+
+faker = Faker()
 
 
 class Command(BaseCommand):
@@ -21,8 +24,9 @@ class Command(BaseCommand):
         def generate_record():
             units = Unit.objects.all()
             for i in range(rows_in_query):
+                date = faker.date_between(start_date='-15y', end_date='now')
                 yield Employee(fio='Employee' + str(i), salary=i, post='Post' + str(i),
-                               employment_date=datetime.date.today(), unit=units[i % 25])
+                               employment_date=date, unit=units[i % 25])
 
         for i in range(10):
             Employee.objects.bulk_create(

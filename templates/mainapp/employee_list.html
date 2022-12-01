@@ -1,0 +1,55 @@
+{% extends "mainapp/base.html" %}
+{% block title %}Посты из категории {{title}}{% endblock %}
+
+{% block content %}
+<main>
+    <section>
+        <div class="mt-5 p-2">
+            <a type=button class="btn btn-secondary" href="/" >Назад</a>
+            <h2>Сотрудники подраздаления {{title}}</h2>
+        </div>
+    </section>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ФИО</th>
+                <th scope="col">Должность</th>
+                <th scope="col">Дата приема на работу</th>
+                <th scope="col">Зарплата</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in page_obj %}
+            <tr>
+                <th>{{post.fio}}</th>
+                <td>{{post.post}}</td>
+                <td>{{post.employment_date}}</td>
+                <td>{{post.salary}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center mb-5">
+            <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class="btn btn-info" role="button">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary" role="button">prev</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary" role="button">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-info" role="button">last &raquo;</a>
+        {% endif %}
+    </span>
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

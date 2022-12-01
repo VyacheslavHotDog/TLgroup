@@ -25,7 +25,7 @@ class Command(BaseCommand):
             units = Unit.objects.all()
             for i in range(rows_in_query):
                 date = faker.date_between(start_date='-15y', end_date='now')
-                yield Employee(fio='Employee' + str(i), salary=i, post='Post' + str(i),
+                yield Employee(fio='Employee' + str(i), salary=i*10, post='Post' + str(i),
                                employment_date=date, unit=units[i % 25])
 
         for i in range(10):
